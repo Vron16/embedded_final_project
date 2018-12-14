@@ -1,8 +1,8 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
-//Date        : Fri Dec 14 00:25:24 2018
-//Host        : ece46 running 64-bit Ubuntu 16.04.5 LTS
+//Date        : Fri Dec 14 14:58:16 2018
+//Host        : ece31 running 64-bit Ubuntu 16.04.5 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
 //Purpose     : IP block netlist
@@ -40,6 +40,7 @@ module design_1
     LDATA_RDY_tri_i,
     LDATA_tri_i,
     SWITCHES_tri_o,
+    clk,
     clk_out1,
     data_tri_o,
     gpio_rtl_tri_o,
@@ -51,7 +52,7 @@ module design_1
   (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_TXD_0 TLAST" *) output AXI_STR_TXD_0_tlast;
   (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_TXD_0 TREADY" *) input AXI_STR_TXD_0_tready;
   (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_TXD_0 TVALID" *) output AXI_STR_TXD_0_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 Addr " *) output [6:0]Addr_tri_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 Addr TRI_O" *) output [6:0]Addr_tri_o;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR ADDR" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME DDR, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250" *) inout [14:0]DDR_addr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR BA" *) inout [2:0]DDR_ba;
   (* X_INTERFACE_INFO = "xilinx.com:interface:ddrx:1.0 DDR CAS_N" *) inout DDR_cas_n;
@@ -73,16 +74,17 @@ module design_1
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_CLK" *) inout FIXED_IO_ps_clk;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB" *) inout FIXED_IO_ps_porb;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB" *) inout FIXED_IO_ps_srstb;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 LDATA_RDY " *) input [0:0]LDATA_RDY_tri_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 LDATA " *) input [23:0]LDATA_tri_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 SWITCHES " *) output [3:0]SWITCHES_tri_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 LDATA_RDY TRI_I" *) input [0:0]LDATA_RDY_tri_i;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 LDATA TRI_I" *) input [23:0]LDATA_tri_i;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 SWITCHES TRI_O" *) output [3:0]SWITCHES_tri_o;
+  output clk;
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK_OUT1 CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK_OUT1, CLK_DOMAIN /clk_wiz_0_clk_out1, FREQ_HZ 12288000, PHASE 0.0" *) output clk_out1;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 data " *) output [8:0]data_tri_o;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl " *) output [0:0]gpio_rtl_tri_o;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 ready " *) input [0:0]ready_tri_i;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 data TRI_O" *) output [8:0]data_tri_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl TRI_O" *) output [0:0]gpio_rtl_tri_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 ready TRI_I" *) input [0:0]ready_tri_i;
   (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESET_RTL RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET_RTL, POLARITY ACTIVE_HIGH" *) input reset_rtl;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 reset " *) output [0:0]reset_tri_o;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 timer_gpio " *) output [0:0]timer_gpio_tri_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 reset TRI_O" *) output [0:0]reset_tri_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 timer_gpio TRI_O" *) output [0:0]timer_gpio_tri_o;
 
   wire [31:0]axi_fifo_mm_s_0_AXI_STR_TXD_TDATA;
   wire axi_fifo_mm_s_0_AXI_STR_TXD_TLAST;
@@ -275,6 +277,7 @@ module design_1
   assign axi_gpio_0_GPIO2_TRI_I = LDATA_tri_i[23:0];
   assign axi_gpio_0_GPIO_TRI_I = LDATA_RDY_tri_i[0];
   assign axi_gpio_3_GPIO_TRI_I = ready_tri_i[0];
+  assign clk = processing_system7_0_FCLK_CLK0;
   assign clk_out1 = clk_wiz_0_clk_out1;
   assign data_tri_o[8:0] = axi_gpio_2_GPIO2_TRI_O;
   assign gpio_rtl_tri_o[0] = axi_gpio_4_GPIO2_TRI_O;

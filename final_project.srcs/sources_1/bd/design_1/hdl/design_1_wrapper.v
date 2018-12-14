@@ -1,8 +1,8 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.2 (lin64) Build 2258646 Thu Jun 14 20:02:38 MDT 2018
-//Date        : Fri Dec 14 00:25:25 2018
-//Host        : ece46 running 64-bit Ubuntu 16.04.5 LTS
+//Date        : Fri Dec 14 14:58:16 2018
+//Host        : ece31 running 64-bit Ubuntu 16.04.5 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -39,6 +39,7 @@ module design_1_wrapper
     LDATA_RDY_tri_i,
     LDATA_tri_i,
     SWITCHES_tri_o,
+    clk,
     clk_out1,
     data_tri_o,
     gpio_rtl_tri_o,
@@ -75,6 +76,7 @@ module design_1_wrapper
   input [0:0]LDATA_RDY_tri_i;
   input [23:0]LDATA_tri_i;
   output [3:0]SWITCHES_tri_o;
+  output clk;
   output clk_out1;
   output [8:0]data_tri_o;
   output [0:0]gpio_rtl_tri_o;
@@ -112,6 +114,7 @@ module design_1_wrapper
   wire [0:0]LDATA_RDY_tri_i;
   wire [23:0]LDATA_tri_i;
   wire [3:0]SWITCHES_tri_o;
+  wire clk;
   wire clk_out1;
   wire [8:0]data_tri_o;
   wire [0:0]gpio_rtl_tri_o;
@@ -150,6 +153,7 @@ module design_1_wrapper
         .LDATA_RDY_tri_i(LDATA_RDY_tri_i),
         .LDATA_tri_i(LDATA_tri_i),
         .SWITCHES_tri_o(SWITCHES_tri_o),
+        .clk(clk),
         .clk_out1(clk_out1),
         .data_tri_o(data_tri_o),
         .gpio_rtl_tri_o(gpio_rtl_tri_o),

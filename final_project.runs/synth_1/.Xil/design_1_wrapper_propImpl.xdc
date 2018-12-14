@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:/home/user/Downloads/LEDVisualizerFiles/ZYBO_Master.xdc rfile:../../../../../Downloads/LEDVisualizerFiles/ZYBO_Master.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:/home/user/Downloads/LEDVisualizerFiles/ZYBO_Master.xdc rfile:../../../../Downloads/LEDVisualizerFiles/ZYBO_Master.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:14 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN G15 [get_ports {switches_tri_o[0]}]
 set_property src_info {type:XDC file:1 line:15 export:INPUT save:INPUT read:READ} [current_design]

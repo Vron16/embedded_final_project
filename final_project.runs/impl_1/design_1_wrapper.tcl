@@ -69,15 +69,15 @@ set rc [catch {
   set_property board_part digilentinc.com:zybo:part0:1.0 [current_project]
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir /home/user/Documents/final_project/final_project.cache/wt [current_project]
-  set_property parent.project_path /home/user/Documents/final_project/final_project.xpr [current_project]
-  set_property ip_output_repo /home/user/Documents/final_project/final_project.cache/ip [current_project]
+  set_property webtalk.parent_dir /home/user/embedded_final_project/final_project.cache/wt [current_project]
+  set_property parent.project_path /home/user/embedded_final_project/final_project.xpr [current_project]
+  set_property ip_output_repo /home/user/embedded_final_project/final_project.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
-  add_files -quiet /home/user/Documents/final_project/final_project.runs/synth_1/design_1_wrapper.dcp
+  add_files -quiet /home/user/embedded_final_project/final_project.runs/synth_1/design_1_wrapper.dcp
   set_msg_config -source 4 -id {BD 41-1661} -limit 0
   set_param project.isImplRun true
-  add_files /home/user/Documents/final_project/final_project.srcs/sources_1/bd/design_1/design_1.bd
+  add_files /home/user/embedded_final_project/final_project.srcs/sources_1/bd/design_1/design_1.bd
   set_param project.isImplRun false
   read_xdc /home/user/Downloads/LEDVisualizerFiles/ZYBO_Master.xdc
   set_param project.isImplRun true
@@ -155,26 +155,6 @@ if {$rc} {
   return -code error $RESULT
 } else {
   end_step route_design
-  unset ACTIVE_STEP 
-}
-
-start_step write_bitstream
-set ACTIVE_STEP write_bitstream
-set rc [catch {
-  create_msg_db write_bitstream.pb
-  set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
-  catch { write_mem_info -force design_1_wrapper.mmi }
-  write_bitstream -force design_1_wrapper.bit 
-  catch { write_sysdef -hwdef design_1_wrapper.hwdef -bitfile design_1_wrapper.bit -meminfo design_1_wrapper.mmi -file design_1_wrapper.sysdef }
-  catch {write_debug_probes -quiet -force design_1_wrapper}
-  catch {file copy -force design_1_wrapper.ltx debug_nets.ltx}
-  close_msg_db -file write_bitstream.pb
-} RESULT]
-if {$rc} {
-  step_failed write_bitstream
-  return -code error $RESULT
-} else {
-  end_step write_bitstream
   unset ACTIVE_STEP 
 }
 
